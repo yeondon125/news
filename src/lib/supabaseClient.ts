@@ -1,12 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
 
 // Supabase 대시보드 → Project Settings → API 에서 복사
-const supabaseUrl = "https://fptyyzmhedoqzignqncr.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZwdHl5em1oZWRvcXppZ25xbmNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg1MjgxNDksImV4cCI6MjA3NDEwNDE0OX0.Cv6mjWQ0lUoZpvgWaxI7Sv5iHN5X1FDS1cgC7LZXMlQ";
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Supabase 클라이언트 생성
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // RegisterForm 타입 예시 추가
 type RegisterForm = {
