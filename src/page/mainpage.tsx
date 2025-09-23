@@ -17,11 +17,11 @@ export default function MainPage() {
   }, []);
 
   return (
-    <div className="">
+    <div className="bg-gray-200">
       <h1 className="text-6xl text-center mb-[50px]">검색 결과</h1>
       <ul>
         {articles.map((a) => (
-          <li key={a.link} className="gap-[50px] mb-[50px]">
+          <li key={a.link} className="gap-[50px] mb-[50px] bg-white ">
             <a
               href={a.link}
               target="_blank"
