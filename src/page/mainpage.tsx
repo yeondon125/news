@@ -8,7 +8,7 @@ export default function MainPage() {
   useEffect(() => {
     (async () => {
       try {
-        const data = await getNews("프론트엔드");
+        const data = await getNews("뉴스");
         setArticles(data);
       } catch (err) {
         console.error(err);
@@ -17,16 +17,20 @@ export default function MainPage() {
   }, []);
 
   return (
-    <div>
-      <h1>검색 결과</h1>
+    <div className="">
+      <h1 className="text-6xl text-center mb-[50px]">검색 결과</h1>
       <ul>
         {articles.map((a) => (
-          <li key={a.link}>
-            <a href={a.link} target="_blank" rel="noopener noreferrer">
-              {a.title}
-            </a>
-            <p>{a.description}</p>
-            <small>{a.pubDate}</small>
+          <li key={a.link} className="gap-[50px] mb-[50px]">
+            <a
+              href={a.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              dangerouslySetInnerHTML={{ __html: a.title }}
+            />
+
+            <p dangerouslySetInnerHTML={{ __html: a.description }} />
+            <small dangerouslySetInnerHTML={{ __html: a.pubDate }} />
           </li>
         ))}
       </ul>
