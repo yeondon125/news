@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { supabase } from "@/lib/index";
 
 export default function SignUp() {
   // 이메일, 비밀번호 상태 관리
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   // 회원가입 함수
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const email = emailRef.current?.value || "";
+    const password = passwordRef.current?.value || "";
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -35,16 +37,14 @@ export default function SignUp() {
         <input
           type="email"
           placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          ref={emailRef}
           className="border p-2 rounded"
           required
         />
         <input
           type="password"
           placeholder="비밀번호"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          ref={passwordRef}
           className="border p-2 rounded"
           required
         />
