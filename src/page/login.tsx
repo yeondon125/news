@@ -3,8 +3,8 @@ import { supabase } from "@/lib";
 
 export default function Login() {
   // 이메일, 비밀번호 상태 관리
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   // 로그인 함수
   const handleLogin = async (e: React.FormEvent) => {
