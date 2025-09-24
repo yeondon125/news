@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const naverApi = axios.create({
+const NaverApi = axios.create({
   baseURL: "/api",
   headers: {
     "X-Naver-Client-Id": import.meta.env.VITE_NAVER_CLIENT_ID!,
@@ -8,4 +8,4 @@ const naverApi = axios.create({
   },
 });
 
-export { naverApi };
+export { NaverApi };

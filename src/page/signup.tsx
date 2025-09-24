@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../lib/supabaseClient";
+import { supabase } from "@/lib/index";
 
 export default function SignUp() {
   // 이메일, 비밀번호 상태 관리

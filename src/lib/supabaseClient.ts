@@ -5,7 +5,7 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Supabase 클라이언트 생성
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // RegisterForm 타입 예시 추가
 type RegisterForm = {
@@ -33,3 +33,5 @@ const onSubmit = async (data: RegisterForm) => {
     console.log("회원가입 성공", signUpData);
   }
 };
+
+export default supabase;

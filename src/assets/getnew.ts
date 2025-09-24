@@ -1,4 +1,4 @@
-import { naverApi } from "../lib/axios";
+import { NaverApi } from "@/lib/axios";
 
 interface Article {
   title: string;
@@ -9,7 +9,7 @@ interface Article {
 
 const getNews = async (query: string, display: number = 10) => {
   try {
-    const res = await naverApi.get("", {
+    const res = await NaverApi.get("", {
       params: { query, display },
     });
     return res.data.items as Article[];

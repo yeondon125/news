@@ -1,7 +1,5 @@
-import Login from "./page/login.tsx";
-import SignUp from "./page/signup.tsx";
-import MainPage from "./page/mainpage.tsx";
-import "./App.css";
+import { Login, SignUp, MainPage } from "@/page";
+import "@/App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {

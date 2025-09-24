@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { getNews } from "../assets/getnew";
-import type { Article } from "../assets/getnew";
+import { getNews, type Article } from "@/assets/getnew";
 
 export default function MainPage() {
   const [articles, setArticles] = useState<Article[]>([]);
