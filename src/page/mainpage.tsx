@@ -1,13 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getNews, type Article } from "@/API/getnew";
 
 export default function MainPage() {
   const [articles, setArticles] = useState<Article[]>([]);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const search = searchRef.current?.value || "뉴스";
+
+  const handleSearch = async (e: React.FormEvent) => {
+    e.preventDefault(); // 새로고침 방지
+    const search = searchRef.current?.value || "뉴스";
+    try {
+      const data = await getNews(search);
+      setArticles(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     (async () => {
       try {
-        const data = await getNews("뉴스");
+        const data = await getNews(search);
         setArticles(data);
       } catch (err) {
         console.error(err);
@@ -18,6 +31,12 @@ export default function MainPage() {
   return (
     <div className="bg-gray-200">
       <h1 className="text-6xl text-center mb-[50px] pt-[50px] ">검색 결과</h1>
+      <div>
+        <form onSubmit={handleSearch}>
+          <input type="text" placeholder="검색" ref={searchRef} />
+          <button type="submit">검색</button>
+        </form>
+      </div>
       <div className="flex flex-wrap justify-center gap-[50px]">
         {articles.map((a) => (
           <div
