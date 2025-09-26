@@ -4,17 +4,11 @@ import { getNews, type Article } from "@/API/getnew";
 export default function MainPage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
-  const search = searchRef.current?.value || "뉴스";
+  const [search, setsearch] = useState("뉴스");
 
   const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault(); // 새로고침 방지
-    const search = searchRef.current?.value || "뉴스";
-    try {
-      const data = await getNews(search);
-      setArticles(data);
-    } catch (err) {
-      console.error(err);
-    }
+    e.preventDefault();
+    setsearch(searchRef.current?.value || "뉴스");
   };
 
   useEffect(() => {
@@ -26,7 +20,7 @@ export default function MainPage() {
         console.error(err);
       }
     })();
-  }, []);
+  }, [search]);
 
   return (
     <div className="bg-gray-200">
