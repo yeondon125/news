@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { getNews, type Article } from "@/API/getnew";
+import { addFavorite } from "@/API/favorite";
 
 export default function MainPage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -21,6 +22,11 @@ export default function MainPage() {
       }
     })();
   }, [search]);
+
+  const add = (articles: Article) => {
+    addFavorite(articles.description, articles.title, articles.link);
+    alert("즐겨찾기에 추가되었습니다.");
+  };
 
   return (
     <div className="bg-gray-200">
@@ -49,6 +55,7 @@ export default function MainPage() {
               type="button"
               className="hover:bg-sky-700 hover:text-white bg-sky-500 text-white p-[10px] w-[100px]"
               value="즐겨찾기"
+              onClick={() => add(a)}
             />
           </div>
         ))}
