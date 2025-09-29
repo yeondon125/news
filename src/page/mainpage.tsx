@@ -1,20 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { getNews, type Article } from "@/API/getnew";
+import { addFavorite } from "@/API/favorite";
 
 export default function MainPage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const searchRef = useRef<HTMLInputElement>(null);
-  const search = searchRef.current?.value || "뉴스";
+  const [search, setsearch] = useState("뉴스");
 
   const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault(); // 새로고침 방지
-    const search = searchRef.current?.value || "뉴스";
-    try {
-      const data = await getNews(search);
-      setArticles(data);
-    } catch (err) {
-      console.error(err);
-    }
+    e.preventDefault();
+    setsearch(searchRef.current?.value || "뉴스");
   };
 
   useEffect(() => {
@@ -26,7 +21,12 @@ export default function MainPage() {
         console.error(err);
       }
     })();
-  }, []);
+  }, [search]);
+
+  const add = (articles: Article) => {
+    addFavorite(articles.description, articles.title, articles.link);
+    alert("즐겨찾기에 추가되었습니다.");
+  };
 
   return (
     <div className="bg-gray-200">
@@ -55,6 +55,7 @@ export default function MainPage() {
               type="button"
               className="hover:bg-sky-700 hover:text-white bg-sky-500 text-white p-[10px] w-[100px]"
               value="즐겨찾기"
+              onClick={() => add(a)}
             />
           </div>
         ))}
